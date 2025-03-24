@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+
+    <link rel="stylesheet"
+        href=
+"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <style>
+      :root {
+        --body-color: #f4f4f4;
+        --dashboard-color: #ffffff;
+        --text-color: #222;
+        --card-bg: #ffffff;
+        --card-shadow: rgba(0, 0, 0, 0.1);
+        --primary-color: #007bff;
+        --secondary-color: #6c757d;
+        --border-color: #ddd;
+        --navbar-bg: rgba(51,45,45,1);
+        --hover-shadow: rgba(0, 0, 0, 0.658) 5px 25px 50px -12px;
+        --navbarlinkcolor: rgba(255, 255, 255, 0.55);
+
+        /* Arama butonu ve giriş kutusu */
+        --search-toggle-color: rgba(255, 255, 255, 0.55);
+        --search-input-bg: rgba(255, 255, 255, 0.2);
+        --search-input-text: #222;
+      }
+
+      .darkmode {
+        --body-color: #0d0d0d;
+        --dashboard-color: rgba(51, 45, 45, 1);
+        --text-color: rgba(255, 255, 255, 0.766);
+        --card-bg:  #000000;
+        --card-shadow: rgba(255, 255, 255, 0.1);
+        --primary-color: #c28d41;
+        --secondary-color: #a0a0a0;
+        --border-color: #333;
+        --navbar-bg: rgba(255, 255, 255, 0.863); 
+        --hover-shadow: rgba(200, 197, 197, 0.363) 5px 25px 50px -12px;
+        --navbarlinkcolor: rgba(0, 0, 0, 0.65);
+
+        /* Arama butonu ve giriş kutusu */
+        --search-toggle-color: rgba(155, 150, 150, 0.98);
+        --search-input-bg: #bcbaba;
+        --search-input-text: #ffffff;
+        --mdb--bg-opacity: 1;
+        --background-color: rgba(51 , 45, 45, var(--mdb--bg-opacity));
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 0.7rem;
+        color: var(--navbarlinkcolor);
+      }
+
+      body{
+        font-family: Arial, sans-serif;
+        background-color: var(--body-color);
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /*NAVBAR*/
+      /*dropdown-pop */
+      .dropdown-toogle{
+        position: relative;
+      }
+
+      .dropdown-menu{
+        display: none;
+        position: absolute; 
+        margin: 0px; 
+        list-style-type: none;
+        border-radius: 0.5rem;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        min-width: 125px;
+        z-index: 10;
+        padding-left: 0px;
+      }
+
+      .dropdown-item{
+        display: block;
+        color: rgba(0, 0, 0, 0.649);
+        padding: 0.9rem 1rem;
+        word-wrap: break-word;
+        text-align: start;
+        font-size: 0.85rem;
+        width: auto;
+      }
+
+      .dropdown-item:hover{
+        background-color: rgba(0, 0, 0, 0.062)
+      }
+
+      .show{
+        display: block;
+        background-color: var(--card-bg);
+        box-shadow: var(--card-shadow);
+      } 
+
+      .dropdown-menu.right-overflow {
+        left: auto;
+        right: 4em;
+      }
+
+      .left-overflow{
+        left: 40px;
+      }
+      
+      .dropdown-menu li{
+        width: 100%;
+        overflow: hidden;
+      }
+      /*dropdown-pop */
+      
+      /* nav styles */
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 0px;
+        background-color: var(--navbar-bg);
+      }
+      
+      .logo {
+        font-size: 1.2rem;
+        color: var(--card-bg);
+        padding-left: 20px;
+      }
+      
+      .hamburger {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Yatayda ortalar */
+        justify-content: center; /* Dikeyde ortalar */
+      }
+      
+      .hamburger .line {
+        display: block;
+        width: 20px;
+        height: 4px;
+        margin-bottom: 3px;
+        background-color: var(--navbarlinkcolor);
+      }
+      
+      .nav__link {
+        position: fixed;
+        width: 100%;
+        top: 5.3rem;
+        left: 0;
+        background-color: var(--navbar-bg);
+        z-index: 10;
+      }
+      
+      .nav__link a {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+      }
+      
+      .nav__link a:hover {
+        background-color: var(--search-toggle-color);
+      }
+
+      .d-flex{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container-fluid{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0px 1rem;
+        align-items: center;
+      }
+        /*search-bar */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .search-toggle {
+            background: none;
+            border: none;
+            color: var(--search-toggle-color);
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-input {
+            width: 0;
+            opacity: 0;
+            border: none;
+            background: var(--search-input-bg);
+            color: var(--dashboard-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            outline: none;
+            transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+            font-size: 14px;
+        }
+
+        /* Butona tıklanınca açılma efekti */
+        .search-container.active .search-input {
+            width: 15vw;
+            opacity: 1;
+            padding: 5px 15px;
+        }
+
+            /* Küçük ekranlarda daha dar */
+        @media (max-width: 992px) {
+          .search-container.active .search-input {
+              width: 24vw;    
+          }
+        }
+
+
+        @media (max-width: 601px) {
+          .search-container.active .search-input {
+              min-width: 80px;
+              width: 45vw;
+          }
+        }
+        /*search-bar */
+
+        /*theme-switch */
+        #theme-switch{
+            height: 30px;
+            width: 30px;
+            padding: 0;
+            border-radius: 50%;
+            background-color: var(--base-variant);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            order:-1;
+          }
+
+          #theme-switch svg{
+            fill: var(--primary-color);
+          }
+          #theme-switch svg:last-child{
+            display: none;
+          }
+          .darkmode #theme-switch svg:first-child{
+            display: none;
+          }
+          .darkmode #theme-switch svg:last-child{
+            display: block;
+          }
+        /*theme-switch */
+
+        /*BİLDİRİM */
+        .notification {
+          position: relative;
+        }
+
+        .icon svg {
+          cursor: pointer;
+          fill: var(--search-toggle-color);
+        }
+          
+        .badge {
+          position: absolute;
+          top: -2px;
+          right: -2px;
+          background: rgb(220, 76, 100);
+          color: white;
+          font-size: 8px;
+          font-weight: 600;
+          padding: 3px 6px;
+          border-radius: 50%;
+        }
+        /*BİLDİRİM */
+
+        /*AVATAR*/
+        .profile-pic{
+          border-radius: 50%;
+          vertical-align: middle;
+          height: 25px;
+          width: 25px;
+          overflow: clip;
+          overflow-clip-margin: content-box;
+        }
+
+
+
+      @media screen and (min-width: 600px) {
+        .nav__link {
+          display: flex;
+          position: static;
+          background: none;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+        }
+      
+        .nav__link a {
+          display: inline-block;
+          padding: 10px 10px;
+          word-wrap: break-word;
+        }
+      
+        .hamburger {
+          display: none;
+        }
+
+        .container-fluid{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding-left: 1rem;
+          margin-right: 3rem;
+        }   
+
+        .left-links{
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .d-flex{
+          gap: 1.5rem;
+        }
+
+        .search-container{
+          margin: 0 10px;
+        }
+
+      }
+
+      @media screen and (max-width: 601px){
+          
+        .hide {
+          display: none !important;
+        }
+
+        .nav__link{
+          top: 7.85rem;
+        }
+
+        .search-container{
+          width: 100%;
+          order: -1;
+          align-items: center;
+          justify-content: center;
+        }    
+
+        .container-fluid{
+          margin-right: 0 !important;
+          flex-wrap: wrap;
+          gap: 5px;
+
+        }
+
+        .nav div.d-flex{
+            order: 3;
+            flex: 1 1 ; 
+            justify-content: space-around !important;
+        }
+        
+        .container-fluid .hamburger {
+            order: 2;
+            width: 25% !important;
+            
+        }
+
+        .dropdown-menu.right-overflow{
+          right: 8vw;
+        }
+        
+      }
+  
+  @media screen and (min-width: 601px) and (max-width: 992px) {
+    .container-fluid{
+      padding: 0 1.5rem;
+      margin: 0 1.5rem;
+    }
+
+    .nav__link {
+        flex-direction: column;
+        position: absolute;
+        top: 5.9rem;
+        left: 0;
+        width: 100%;
+        background-color: var(--navbar-bg);
+    }
+
+    .left-links{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav__link a {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .nav__link a, .left-links{
+      width: 100%;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    .hamburger {
+        display: block; /* Mobil menü simgesi görünür olacak */
+        padding: 0 20px;
+        order: 4;
+    }
+
+    .d-flex{
+      gap:7.5vw;
+      width: fit-content;
+    }
+
+    .right-overflow{
+      right: auto !important;
+    }
+
+  }
+
+    @-webkit-keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+
+    .fade-in {
+      -webkit-animation: fade-in 800ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+              animation: fade-in 800ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    }
+      /*NAVBAR*/
+
+      .dashboard-container{
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: var(--body-color);
+      }
+
+      .dashboard{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 20px;
+        padding: 20px;
+        max-width: 90%;
+        height: min-content;
+        margin: auto;
+        background-color: var(--body-color);
+      }
+
+      .card{
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 12px;
+        gap: 5px;
+        box-shadow: 0 2px 4px var(--card-shadow);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        color: var(--text-color) !important;
+      }
+
+      .card-head {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center; 
+        bottom: 5%;
+      }   
+
+
+      .card-head h2{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      .cards-link{
+        text-decoration: none;
+        font-size: medium;
+        transition: box-shadow 0.5s linear, transform 0.7s ease-in-out;
+      }
+
+      .cards-link:hover{
+        transform: scale(1.05);
+        animation:  blink 0.7s ease 0s 1 forwards;   
+      }
+
+      .card-imgcontainer{
+        max-width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin:  1vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card-imgcontainer img{
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+      }
+
+      .user-img-container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+      }
+          
+      .user-img {
+          max-height: 175px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid var(--border-color); 
+      }
+
+      .course {
+          padding: 10px;
+          background: var(--border-color);
+          border-radius: 15px;
+          font-size: 0.8rem;
+          text-align: left;
+          /* Başlangıçta hafif bir gölge ve transition ekliyoruz */
+          box-shadow: 0 2px 4px var(--card-shadow);
+          transition: box-shadow 0.5s linear, transform 0.7s ease-in-out;
+      }
+
+      .course:hover {
+          transform: scale(1.15);
+          box-shadow: var(--hover-shadow) /* Hover olduğunda gölge büyüyor */
+      }
+
+      .course-text{
+          color: var(--text-color);
+          font-weight: 600;       
+      }
+
+      .course svg{
+          display: block;
+          margin-bottom: 5px;
+          fill: var(--text-color);
+      }
+
+      #courses{
+          background-color: var(--card-bg);
+          width: 100%;
+          height: 60%;
+          padding: 0;
+      }
+
+      .courses.dashboard{
+          max-width: 100%;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;  
+      }
+
+      .card-head a,.card-head i{
+          color: var(--primary-color);
+      }
+
+      .full-width{
+          grid-column: span 3;
+      }
+
+      .fa-chevron-right{
+          margin-left: 2vh;
+      }
+
+      /*burdan sonrası notlar kısmındaki bara ait alınma*/
+      .simple-bar-chart{
+          --line-count: 10;
+          --line-color: currentcolor;
+          --line-opacity: 0.25;
+          --item-gap: 2%;
+          --item-default-color: #060606;
+          
+        /* height: clamp(10vw,20vw,30vw);*/
+          height: 12vw;
+          min-height: 200px;  /* Küçük ekranlarda en az 200px olmasını sağlar */  
+          display: grid;
+          grid-auto-flow: column;
+          gap: var(--item-gap);
+          align-items: end;
+          padding-inline: var(--item-gap);
+          --padding-block: 1.5rem; /*space for labels*/
+          padding-block: var(--padding-block);
+          position: relative;
+          isolation: isolate;
+        }
+        
+        .simple-bar-chart::after{
+          content: "";
+          position: absolute;
+          inset: var(--padding-block) 0;
+          z-index: -1;
+          --line-width: 1px;
+          --line-spacing: calc(100% / var(--line-count));
+          background-image: repeating-linear-gradient(to top, transparent 0 calc(var(--line-spacing) - var(--line-width)), var(--line-color) 0 var(--line-spacing));
+          box-shadow: 0 var(--line-width) 0 var(--line-color);
+          opacity: var(--line-opacity);
+        }
+        .simple-bar-chart > .item{
+          height: calc(1% * var(--val));
+          background-color: var(--clr, var(--item-default-color));
+          opacity: 0.75;
+          position: relative;
+          animation: item-height 1s ease forwards
+        }
+        @keyframes item-height { from { height: 0 } }
+        
+        .simple-bar-chart > .item > * { position: absolute; text-align: center }
+        .simple-bar-chart > .item > .label { inset: 100% 0 auto 0 }
+        .simple-bar-chart > .item > .value { inset: auto 0 100% 0 }
+      /*buraya kadar ntolar kısmındaki barlar içindi */
+
+      .gray { background: #4A4A4A; }
+      .green { background: #357b37; }
+      .lightgreen { background: #6DBF6D; }
+      .orange { background: #F4A261; }
+      .blue { background: #4682B4; }
+      .red { background: #D9534F; }
+
+      @media screen and (min-width: 601px) and (max-width: 1280px) {
+          .dashboard {
+              display: grid;
+              grid-template-columns: repeat(2,1fr);
+              gap: 35px; 
+          }
+
+          .course-text,.course-icon{ 
+              display: inline-block;
+              width: fit-content;
+              vertical-align: middle; 
+          }
+          
+          .card{
+              grid-column: span 1;
+          }
+
+          .card.full-width{
+              grid-column: span 2;
+          }
+
+          .courses,.card-head{
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+          }
+
+          .card-head{
+            margin-bottom: 1rem;
+          }
+
+          .courses{
+              gap: 20px;
+              height: 90% !important;
+          }
+
+          .course{
+              font-size: medium;
+              text-align: center;
+          }
+
+          .user-img {
+              max-height: 200px;
+          }
+
+          .simple-bar-chart{
+              height: 100%;
+          }
+
+          .simple-bar-chart > .item > .value {
+              inset: auto 0 100% 0;
+              font-size: 0.75rem;
+              font-weight: bold;
+          }
+
+          .simple-bar-chart > .item > .label {
+              font-size: 0.78rem;
+              font-weight: bold;
+          }
+
+      }
+
+      @media screen and (max-width: 601px)  {
+          .dashboard {    
+              display: flex;
+              flex-direction: column;
+              gap: 35px; 
+          }
+
+          .courses,.card-head{
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+          }
+
+          .course-text,.course-icon{ 
+              display: inline-block;
+              width: fit-content;
+              vertical-align: middle; 
+          }
+
+          .course{
+              font-size: small;
+              text-align: center;
+          }
+
+          .card-head h2{
+              font-size: 1rem !important;
+          }
+
+          .card-head{
+              font-size: 0.8rem;
+              font-weight: bolder;
+          }
+
+          .simple-bar-chart > .item > .value {
+              inset: auto 0 100% 0;
+              font-size: 0.71rem;
+              font-weight: bold;
+          }
+
+          .simple-bar-chart > .item > .label {
+              font-size: 0.71rem;
+              font-weight: bold;
+          }
+          
+          .cards-link{
+            font-size: small;
+          }
+
+      }
+          /*CALENDAR*/
+          .calendar-container {
+              background: var(--card-bg);
+              max-width: 100%;
+          }
+
+          .calendar-container header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+          }
+
+          header .calendar-navigation {
+              display: flex;
+          }
+
+          header .calendar-navigation span {
+              height: 38px;
+              width: 38px;
+              margin: 0 1px;
+              cursor: pointer;
+              text-align: center;
+              line-height: 38px;
+              border-radius: 50%;
+              user-select: none;
+              color: #aeabab;
+              font-size: 1.5rem;
+          }
+
+          .calendar-navigation span:last-child {
+              margin-right: -10px;
+          }
+
+          header .calendar-navigation span:hover {
+              background: #f2f2f2;
+          }
+
+          header .calendar-current-date {
+              font-weight: 500;
+              font-size: 1rem;
+          }
+
+          .calendar-current-date{
+              margin-top: 0px;
+              margin-bottom: 0px;
+          }
+
+          .calendar-body ul {
+              list-style: none;
+              flex-wrap: wrap;
+              display: flex;
+              text-align: center;
+          }
+
+          .calendar-body .calendar-dates {
+              margin-bottom: 20px;
+          }
+
+          .calendar-body li {
+              width: calc(100% / 7);
+              font-size: 1rem;
+              color: var(--text-color);
+          }
+
+          .calendar-body .calendar-weekdays li {
+              cursor: default;
+              font-weight: 500;
+          }
+
+          .calendar-body .calendar-dates li {
+              margin-top: 10px;
+              position: relative;
+              z-index: 1;
+              cursor: pointer;
+          }
+
+          .calendar-weekdays,.calendar-dates{
+              padding-left: 0px;
+          }
+
+          .calendar-dates li.inactive {
+              color: #aaa;
+          }
+
+          .calendar-dates li.active {
+              color: #fff;
+          }
+
+          .calendar-dates li::before {
+              position: absolute;
+              content: "";
+              z-index: -1;
+              top: 50%;
+              left: 50%;
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+              transform: translate(-50%, -50%);
+          }
+
+          .calendar-dates li.active::before {
+              background: var(--primary-color);
+          }
+
+          .calendar-dates li:not(.active):hover::before {
+              background: #e4e1e1;
+          }
+          @media screen and (min-width: 601px) and (max-width: 1280px) {
+              .calendar-body li {
+                  font-size: 0.87rem;
+              }
+
+              header .calendar-current-date {
+                  font-size: 0.87rem;
+              }
+
+              .calendar-dates li::before {
+                  width: 25px;
+                  height: 25px;    
+              }
+
+          }
+
+          @media screen and (max-width: 601px){
+              .calendar-body li {
+                  font-size: 0.65rem;
+              }
+
+              header .calendar-current-date {
+                  font-size: 0.65rem;
+              }
+
+              .calendar-dates li::before {
+                  width: 20px;
+                  height: 20px;
+              }
+
+          }
+          /*CALENDAR*/
+
+              /* Ana Container */
+          .card-doughnut-container {
+              position: relative;
+              width: 60%;
+              max-width: 300px;
+              margin: auto;
+          }
+
+          /* Chart Label Container (Grafikten Daha Büyük Yapıldı) */
+          .chart-labels{
+              position: absolute;
+              z-index: 1;
+              width: 85%;/* Canvas'tan büyük hale getirildi */
+              left: 8.5%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              font-size: clamp(0.8rem, 1vw, 1.6rem);
+              pointer-events: none; /* Grafik etkileşimini engelle */
+          }
+
+          .chart-labels.top{
+              top: 20%;
+          }
+
+          .chart-labels.bottom{
+              bottom: 20%;
+          }
+
+          .chart-labels p{
+              font-weight: 600; 
+          }
+
+          canvas {
+              width: 100% !important;
+              height: auto !important;
+          }
+
+          @media screen and (max-width: 601px)  {
+              .chart-labels.top{
+                  bottom: 23vw;
+                  font-size: 0.7rem;
+              }
+              
+              .chart-labels.bottom{
+                  bottom: 9%;
+                  font-size: 0.7rem;
+            }
+          }
+
+          @media screen and (min-width: 601px) and (max-width: 1280px) {
+
+              .chart-labels.top{
+                  bottom: 10vw;
+                  font-size: 0.7rem;
+              }
+              
+              .chart-labels.bottom{
+                  bottom: 15%;
+                  font-size: 0.7rem;
+            }
+
+          }
+
+            @keyframes blink {
+              0% {
+                opacity: 1;
+              }
+            
+              50% {
+                opacity: 0.5;
+              }
+            
+              100% {
+                opacity: 1;
+              }
+            }
+
+            @keyframes hoverColorChange  {
+              100% {
+                fill: rgba(255, 255, 255, 0.863);
+                color: rgba(255, 255, 255, 0.863);
+              }
+            }
+
+        .hoverColorChange {
+            animation: hoverColorChange  0.5s ease 0s 1 forwards;
+        }
+
+
+    </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+          <!-- NAV CONTAINER -->
+        <div class="container-fluid"> 
+            
+            <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+              
+              <!-- LEFT-SİDE -->
+              <div class="nav__link hide">
+                <a href="/" class="logo">BULearn</a>
+              <!-- LEFT-LİNKS -->
+               <div class="left-links">
+                <a href="#">Ana Sayfa</a>
+                <a href="#">Kurslarım</a>
+                <a href="#">Notlarım</a>
+                <a href="#">Takvim</a>
+                <a href="#">Sertifika ve Rozet</a>
+                <a href="#">Yetkinlik</a>
+                <a href="#">Öğrenme Patikası</a>
+               </div>
+              <!-- LEFT-LİNKS -->
+               </div>
+              <!-- LEFT-SİDE -->
+    
+              <!-- SEARCHBAR -->
+              <div class="search-container">
+                <button class="search-toggle">
+                  <i class="fas fa-search"></i>
+                </button>
+                <input type="text" class="search-input" placeholder="Ara...">
+              </div>
+              <!-- SEARCHBAR -->
+                    
+            <!-- RIGHT ITEMS -->
+            <div class="d-flex">
+                <!-- Dark-Light toggle -->
+                <button id="theme-switch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+                </button>
+                <!-- Dark-Light toggle -->
+
+                <!-- Notification -->
+                <div class="notification dropdown-toggle">
+                    <a href="#" id="navbarDropdownMenuNotification" aria-expanded="false">
+                        <span class="icon">
+                            <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+                            <svg height="28px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M381.7,225.9c0-97.6-52.5-130.8-101.6-138.2c0-0.5,0.1-1,0.1-1.6c0-12.3-10.9-22.1-24.2-22.1c-13.3,0-23.8,9.8-23.8,22.1   c0,0.6,0,1.1,0.1,1.6c-49.2,7.5-102,40.8-102,138.4c0,113.8-28.3,126-66.3,158h384C410.2,352,381.7,339.7,381.7,225.9z"/>
+                                <path d="M256.2,448c26.8,0,48.8-19.9,51.7-43H204.5C207.3,428.1,229.4,448,256.2,448z"/>
+                                </g>
+                            </svg>
+                        </span>
+                        <span id="notification-badge" class="badge">1</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuNotification">
+                        <li>
+                          <a class="dropdown-item" href="#">My profile</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">Settings</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">Logout</a>
+                        </li>
+                      </ul>
+                 </div>
+                <!-- Notification -->
+
+                <!-- Language -->
+                  <div class="language dropdown-toggle">
+                    <a href="#" id="navbarDropdownMenuLanguage" aria-expanded="false">
+                      <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+                      <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 50 100" xml:space="preserve">
+                        <desc>Created with Fabric.js 5.2.4</desc>
+                        <defs>
+                        </defs>
+                        <g transform="matrix(1 0 0 1 25 25)" id="8e4efda8-fdc3-4963-87a6-204168f7decf"  >
+                        <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-540" y="-540" rx="0" ry="0" width="540" height="540" />
+                        </g>
+                        <g transform="matrix(1 0 0 1 25 25)" id="e9820969-bb0c-4295-9f3e-3e551b725d8c"  >
+                        </g>
+                        <g transform="matrix(1 0 0 1 10 50)" id="80ad46f2-6494-4b17-b1d0-4bf057224901"  >
+                          <image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  xlink:href="data:image/png;base64,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" x="-90" y="-90" width="180" height="180"></image>
+                        </g>
+                        <g transform="matrix(0 0.19 -0.19 0 50 50)" id="9ab6e086-8ad6-4528-bd4b-62e166427b57"  >
+                        <polygon style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(147,147,147); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  points="-30.68,-37.41 30.68,0 -30.68,37.41 " />
+                        </g>
+                      </svg>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLanguage">
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          ><i class="flag-united-kingdom flag"></i>English
+                          <i class="fa fa-check text-success ms-2"></i
+                        ></a>
+                      </li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-turkey flag"></i>Türkçe</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+                      </li>
+                    </ul>
+                 </div>
+                <!-- Language -->
+
+                <!-- Avatar -->
+                 <div class="navbar-ava dropdown-toggle" >
+                    <a href="#" id="navbarDropdownMenuAvatar" aria-expanded="false">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile" class="profile-pic">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                          <a class="dropdown-item" href="#">My profile</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">Settings</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">Logout</a>
+                        </li>
+                    </ul>
+                 </div>
+                <!-- Avatar -->
+            </div>
+            <!-- RIGHT ITEMS -->
+        </div>
+        <!-- NAV CONTAINER -->
+    </nav>
+  </header>
+
+    <!-- Dashboard -->
+  <div class="dashboard-container">
+    <div class="dashboard">
+
+        <!-- Card1 -->
+        <div class="card">
+            <div class="card-head">
+                <h2 id="user-name">Burhan Günay</h2>
+                <a href="" class="cards-link">Profile Git
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>  
+            <div class="user-img-container">
+                <img src="https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg" alt="Kullanıcı Resmi" class="user-img"> 
+            </div> 
+        </div>
+        <!-- Card1 -->
+
+         <!-- Card2 -->
+        <div class="card">
+            <div class="card-head">
+                <h2>Kurslarım</h2>
+                <a href="" class="cards-link">Kurslara Git
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a> 
+            </div>
+            <!-- Card_Course -->
+            <div class="courses dashboard" id="courses">
+
+                <div class="course gray">
+                  <a href="#" class="coursecard-link">
+                    <div class="course-icon">                   
+                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 21.9296 37.1406 C 24.0858 37.1406 25.3983 37.9844 26.0780 38.4063 C 26.2890 38.5234 26.9218 38.8984 27.0390 38.9219 L 27.0390 19.5390 C 26.1952 17.9219 23.9687 16.7266 21.3202 16.7266 C 18.3436 16.7266 15.6483 18.1094 14.8046 19.8203 L 14.8046 37.9375 C 14.8046 38.7812 15.2968 39.0859 15.9062 39.0859 C 16.3983 39.0859 16.7030 38.9219 17.0077 38.6875 C 17.7812 37.9844 19.5390 37.1406 21.9296 37.1406 Z M 34.0468 37.1406 C 36.4140 37.1406 38.1952 37.9844 38.9687 38.6875 C 39.2499 38.9219 39.5780 39.0859 40.0702 39.0859 C 40.6796 39.0859 41.1483 38.7812 41.1483 37.9375 L 41.1483 19.8203 C 40.3046 18.1094 37.6093 16.7266 34.6327 16.7266 C 32.0312 16.7266 29.8046 17.9219 28.9374 19.5390 L 28.9374 38.9688 C 29.1014 38.9453 29.6640 38.5469 29.8983 38.4063 C 30.5546 37.9609 31.8905 37.1406 34.0468 37.1406 Z"></path></g></svg>
+                    </div>                               
+                    <div class="course-text">Protokol Kursu</div>
+                  </a>
+                </div>
+
+                <div class="course green">
+                  <a href="#" class="coursecard-link">
+                    <div class="course-icon">                   
+                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 21.9296 37.1406 C 24.0858 37.1406 25.3983 37.9844 26.0780 38.4063 C 26.2890 38.5234 26.9218 38.8984 27.0390 38.9219 L 27.0390 19.5390 C 26.1952 17.9219 23.9687 16.7266 21.3202 16.7266 C 18.3436 16.7266 15.6483 18.1094 14.8046 19.8203 L 14.8046 37.9375 C 14.8046 38.7812 15.2968 39.0859 15.9062 39.0859 C 16.3983 39.0859 16.7030 38.9219 17.0077 38.6875 C 17.7812 37.9844 19.5390 37.1406 21.9296 37.1406 Z M 34.0468 37.1406 C 36.4140 37.1406 38.1952 37.9844 38.9687 38.6875 C 39.2499 38.9219 39.5780 39.0859 40.0702 39.0859 C 40.6796 39.0859 41.1483 38.7812 41.1483 37.9375 L 41.1483 19.8203 C 40.3046 18.1094 37.6093 16.7266 34.6327 16.7266 C 32.0312 16.7266 29.8046 17.9219 28.9374 19.5390 L 28.9374 38.9688 C 29.1014 38.9453 29.6640 38.5469 29.8983 38.4063 C 30.5546 37.9609 31.8905 37.1406 34.0468 37.1406 Z"></path></g></svg>
+                    </div>                               
+                    <div class="course-text">Excel 365 Kursu</div>
+                  </a>
+                </div>
+
+                <div class="course lightgreen">
+                  <a href="#" class="coursecard-link">
+                    <div class="course-icon">                   
+                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 21.9296 37.1406 C 24.0858 37.1406 25.3983 37.9844 26.0780 38.4063 C 26.2890 38.5234 26.9218 38.8984 27.0390 38.9219 L 27.0390 19.5390 C 26.1952 17.9219 23.9687 16.7266 21.3202 16.7266 C 18.3436 16.7266 15.6483 18.1094 14.8046 19.8203 L 14.8046 37.9375 C 14.8046 38.7812 15.2968 39.0859 15.9062 39.0859 C 16.3983 39.0859 16.7030 38.9219 17.0077 38.6875 C 17.7812 37.9844 19.5390 37.1406 21.9296 37.1406 Z M 34.0468 37.1406 C 36.4140 37.1406 38.1952 37.9844 38.9687 38.6875 C 39.2499 38.9219 39.5780 39.0859 40.0702 39.0859 C 40.6796 39.0859 41.1483 38.7812 41.1483 37.9375 L 41.1483 19.8203 C 40.3046 18.1094 37.6093 16.7266 34.6327 16.7266 C 32.0312 16.7266 29.8046 17.9219 28.9374 19.5390 L 28.9374 38.9688 C 29.1014 38.9453 29.6640 38.5469 29.8983 38.4063 C 30.5546 37.9609 31.8905 37.1406 34.0468 37.1406 Z"></path></g></svg>
+                    </div>           
+                    <div class="course-text">eXeLearning Kursu</div>
+                  </a>
+                </div>
+
+                <div class="course orange">
+                  <a href="#" class="coursecard-link">
+                    <div class="course-icon">                   
+                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 21.9296 37.1406 C 24.0858 37.1406 25.3983 37.9844 26.0780 38.4063 C 26.2890 38.5234 26.9218 38.8984 27.0390 38.9219 L 27.0390 19.5390 C 26.1952 17.9219 23.9687 16.7266 21.3202 16.7266 C 18.3436 16.7266 15.6483 18.1094 14.8046 19.8203 L 14.8046 37.9375 C 14.8046 38.7812 15.2968 39.0859 15.9062 39.0859 C 16.3983 39.0859 16.7030 38.9219 17.0077 38.6875 C 17.7812 37.9844 19.5390 37.1406 21.9296 37.1406 Z M 34.0468 37.1406 C 36.4140 37.1406 38.1952 37.9844 38.9687 38.6875 C 39.2499 38.9219 39.5780 39.0859 40.0702 39.0859 C 40.6796 39.0859 41.1483 38.7812 41.1483 37.9375 L 41.1483 19.8203 C 40.3046 18.1094 37.6093 16.7266 34.6327 16.7266 C 32.0312 16.7266 29.8046 17.9219 28.9374 19.5390 L 28.9374 38.9688 C 29.1014 38.9453 29.6640 38.5469 29.8983 38.4063 C 30.5546 37.9609 31.8905 37.1406 34.0468 37.1406 Z"></path></g></svg>
+                    </div>                    
+                    <div class="course-text">Moodle Kursu</div>
+                  </a>
+                </div>
+                
+                <div class="course blue">
+                  <a href="#" class="coursecard-link">
+                    <div class="course-icon">                   
+                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 21.9296 37.1406 C 24.0858 37.1406 25.3983 37.9844 26.0780 38.4063 C 26.2890 38.5234 26.9218 38.8984 27.0390 38.9219 L 27.0390 19.5390 C 26.1952 17.9219 23.9687 16.7266 21.3202 16.7266 C 18.3436 16.7266 15.6483 18.1094 14.8046 19.8203 L 14.8046 37.9375 C 14.8046 38.7812 15.2968 39.0859 15.9062 39.0859 C 16.3983 39.0859 16.7030 38.9219 17.0077 38.6875 C 17.7812 37.9844 19.5390 37.1406 21.9296 37.1406 Z M 34.0468 37.1406 C 36.4140 37.1406 38.1952 37.9844 38.9687 38.6875 C 39.2499 38.9219 39.5780 39.0859 40.0702 39.0859 C 40.6796 39.0859 41.1483 38.7812 41.1483 37.9375 L 41.1483 19.8203 C 40.3046 18.1094 37.6093 16.7266 34.6327 16.7266 C 32.0312 16.7266 29.8046 17.9219 28.9374 19.5390 L 28.9374 38.9688 C 29.1014 38.9453 29.6640 38.5469 29.8983 38.4063 C 30.5546 37.9609 31.8905 37.1406 34.0468 37.1406 Z"></path></g></svg>
+                    </div>                    
+                    <div class="course-text">H5P Kursu</div>
+                  </a>
+                </div>
+
+                <div class="course red">
+                  <a href="#" class="coursecard-link">
+                    <div class="course-icon">                   
+                         <svg fill="#000000" width="20px" height="20px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 27.9999 51.9063 C 41.0546 51.9063 51.9063 41.0781 51.9063 28 C 51.9063 14.9453 41.0312 4.0937 27.9765 4.0937 C 14.8983 4.0937 4.0937 14.9453 4.0937 28 C 4.0937 41.0781 14.9218 51.9063 27.9999 51.9063 Z M 27.9999 47.9219 C 16.9374 47.9219 8.1014 39.0625 8.1014 28 C 8.1014 16.9609 16.9140 8.0781 27.9765 8.0781 C 39.0155 8.0781 47.8983 16.9609 47.9219 28 C 47.9454 39.0625 39.0390 47.9219 27.9999 47.9219 Z M 21.9296 37.1406 C 24.0858 37.1406 25.3983 37.9844 26.0780 38.4063 C 26.2890 38.5234 26.9218 38.8984 27.0390 38.9219 L 27.0390 19.5390 C 26.1952 17.9219 23.9687 16.7266 21.3202 16.7266 C 18.3436 16.7266 15.6483 18.1094 14.8046 19.8203 L 14.8046 37.9375 C 14.8046 38.7812 15.2968 39.0859 15.9062 39.0859 C 16.3983 39.0859 16.7030 38.9219 17.0077 38.6875 C 17.7812 37.9844 19.5390 37.1406 21.9296 37.1406 Z M 34.0468 37.1406 C 36.4140 37.1406 38.1952 37.9844 38.9687 38.6875 C 39.2499 38.9219 39.5780 39.0859 40.0702 39.0859 C 40.6796 39.0859 41.1483 38.7812 41.1483 37.9375 L 41.1483 19.8203 C 40.3046 18.1094 37.6093 16.7266 34.6327 16.7266 C 32.0312 16.7266 29.8046 17.9219 28.9374 19.5390 L 28.9374 38.9688 C 29.1014 38.9453 29.6640 38.5469 29.8983 38.4063 C 30.5546 37.9609 31.8905 37.1406 34.0468 37.1406 Z"></path></g></svg>
+                    </div>
+                    <div class="course-text">CC Kursu</div>
+                  </a>
+                </div>
+            </div>
+            <!-- Card_Course --> 
+        </div>
+        <!-- Card2 -->  
+
+        <!-- Card3 -->
+        <div class="card">
+            <div class="card-head">
+                <h2>Notlarım</h2>
+                <a href="" class="cards-link">Notlarıma Git
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <!-- BARCHART -->
+            <div class="simple-bar-chart">
+            
+            <div class="item" style="--clr: #5EB344; --val: 80">
+                <div class="label">Label 1</div>
+                <div class="value">80%</div>
+            </div>
+            
+            <div class="item" style="--clr: #FCB72A; --val: 50">
+                <div class="label">Label 2</div>
+                <div class="value">50%</div>
+            </div>
+            
+            <div class="item" style="--clr: #F8821A; --val: 100">
+                <div class="label">Label 3</div>
+                <div class="value">100%</div>
+            </div>
+            
+            <div class="item" style="--clr: #E0393E; --val: 15">
+                <div class="label">Label 4</div>
+                <div class="value">15%</div>
+            </div>
+            
+            <div class="item" style="--clr: #963D97; --val: 1">
+                <div class="label">Label 5</div>
+                <div class="value">1%</div>
+            </div>
+            
+            <div class="item" style="--clr: #069CDB; --val: 90">
+                <div class="label">Label 6</div>
+                <div class="value">90%</div>
+            </div>
+            </div>
+            <!-- BARCHART -->
+        </div>
+        <!-- Card3 -->
+
+        <!-- Card4 -->
+        <div class="card">
+            <div class="card-head">
+                <h2>Takvim</h2>
+                <a href="" class="cards-link">Takvime Git
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            
+                        <!-- Calendar -->   
+                <div class="calendar-container">
+                  <header class="calendar-header">
+                      <p class="calendar-current-date"></p>
+                      <div class="calendar-navigation">
+                          <span id="calendar-prev" 
+                                class="material-symbols-rounded">
+                              chevron_left
+                          </span>
+                          <span id="calendar-next" 
+                                class="material-symbols-rounded">
+                              chevron_right
+                          </span>
+                      </div>
+                  </header>
+          
+                  <div class="calendar-body">
+                      <ul class="calendar-weekdays">
+                          <li>Sun</li>
+                          <li>Mon</li>
+                          <li>Tue</li>
+                          <li>Wed</li>
+                          <li>Thu</li>
+                          <li>Fri</li>
+                          <li>Sat</li>
+                      </ul>
+                      <ul class="calendar-dates"></ul>
+                  </div>
+                </div>
+                <!-- Calendar -->     
+        
+        </div>
+        <!-- Card4 -->
+        
+        <!-- Card5 -->
+        <div class="card">
+            <div class="card-head">
+                <h2>Sertifika ve Rozet</h2>
+                <a href="" class="cards-link">Sertifikaya Git
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="card-imgcontainer">
+              <img src="./pictures-icons/pictures/lightmode/certificate-light.png" alt="">
+            </div>
+        </div>
+        <!-- Card5 -->
+        
+        <!-- Card6 -->
+        <div class="card">
+          <div class="card-head">
+              <h2>Yetkinlik</h2>
+              <a href="" class="cards-link">Yetkinliğe Git
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </a>
+          </div>
+      
+          
+            <div class="chart-labels top">
+              <span class="top-left">Okuma <p>%25</p></span>
+              <span class="top-right">İzleme <p>%25</p></span>
+            </div>
+            <div class="card-doughnut-container">
+            <canvas id="doughnutChart"></canvas>
+            </div>
+            <div class="chart-labels bottom">
+              <span class="bottom-left">Ödev <p>%25</p> </span>
+              <span class="bottom-right">Forum <p>%25</p> </span>
+            </div>
+          
+        </div>
+        <!-- Card6 -->
+
+        <!-- Card7 -->
+        <div class="card full-width">
+            <div class="card-head">
+                <h2>Öğrenme Patikası</h2>
+                <a href="" class="cards-link">Öğrenme Patikasına Git
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i> 
+                </a>
+            </div>
+            <div class="card-imgcontainer">
+                <img src="../pictures-icons/pictures/lightmode/learninpath.png" alt="learninpath-example">     
+            </div>
+        </div>
+        <!-- Card7 -->
+        
+    </div>
+  </div>
+    <!-- Dashboard -->
+
+
+    <script>
+    
+      const dataSets = [
+          [25, 25, 25, 25], 
+      ];
+
+      const lightColors = [
+          ['#66b3ff', '#d1dbe7', '#003366', '#7193b9'],
+          ['#ff9999', '#ffcc99', '#99ff99', '#99ccff'],
+          ['#660066', '#ff6699', '#ff9966', '#ffcc66'],  
+      ];
+
+      const darkColors = [
+          ['#813717',"#2f2519","#efb375",'#8e6c46'],
+      ]
+
+      //NAVBAR-JS
+      const hamburger = document.querySelector('.hamburger');
+      const navLink = document.querySelector('.nav__link');
+      const avatar = document.querySelector('#navbarDropdownMenuAvatar');
+
+      hamburger.addEventListener('click', () => {
+        navLink.classList.toggle('hide');
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const dropdowns = document.querySelectorAll('.dropdown-toggle'); // Tüm dropdown butonlarını al
+        const allMenus = document.querySelectorAll('.dropdown-menu'); // Tüm dropdown menüleri al
+
+        dropdowns.forEach(dropdown => {
+          dropdown.addEventListener('click', (event) => {
+            event.stopPropagation(); // Tıklamanın yayılmasını engelle
+
+              const menu = dropdown.querySelector('.dropdown-menu'); // Dropdown'un ilgili menüsü
+
+              // Eğer tıklanan menü açıksa sadece onu kapat
+              if (menu.classList.contains('show')) {
+                  menu.classList.remove('show');
+                  menu.classList.remove('left-overflow');
+                  menu.classList.remove('right-overflow');
+                  menu.classList.remove('fade-in');
+                  return; // İşlemi bitir
+              }
+
+              // Tüm açık menüleri kapat
+              allMenus.forEach(m => {
+                  m.classList.remove('show');
+                  m.classList.remove('left-overflow');
+                  m.classList.remove('right-overflow');
+                  menu.classList.remove('fade-in');
+              });
+
+              // Tıklanan dropdown'un menüsünü aç
+              menu.classList.add('show');
+              menu.classList.add('fade-in');
+
+              const rect = menu.getBoundingClientRect();
+              if (rect.right > window.innerWidth ) {
+                  menu.classList.add("right-overflow"); // Sağdan taşıyorsa sola hizala
+              }else{
+
+              }
+          });
+        });
+
+          // Sayfanın herhangi bir yerine tıklanınca tüm dropdown'ları kapat
+          document.addEventListener('click', () => {
+              allMenus.forEach(m => {
+                  m.classList.remove('show');
+                  m.classList.remove('left-overflow');
+                  m.classList.remove('right-overflow');
+                  m.classList.remove('fade-in');
+              });
+          });
+
+          // Menü içindeki bir öğeye tıklanınca dropdown kapanmasın
+          allMenus.forEach(menu => {
+              menu.addEventListener('click', (event) => {
+                  event.stopPropagation();
+              });
+          });
+      });
+
+      // THEME-JS
+      function navi_themeSwitch(isItDark) {
+        const nav = document.querySelector("nav");
+        if (!isItDark) {
+          nav.classList.remove("navbar-secondary", "bg-body-secondary", "bg-secondary");
+          nav.classList.add("navbar-dark", "bg-body-dark", "bg-dark");
+        } else {
+          nav.classList.remove("navbar-dark", "bg-body-dark", "bg-dark");
+          nav.classList.add("navbar-secondary", "bg-body-secondary", "bg-secondary");
+        }
+      }
+
+      let isItDark = false;
+      let darkmode = localStorage.getItem("darkmode");
+      const themeSwitch = document.getElementById("theme-switch");
+
+      // 🎨 DARK MODE AKTİF ETME
+      const enableDarkmode = () => {
+        isItDark = true;
+        document.body.classList.add("darkmode");
+        navi_themeSwitch(isItDark);
+        localStorage.setItem("darkmode", "active");
+        drawMultiDoughnutChart("doughnutChart", dataSets, darkColors, "black",isItDark);
+      };
+
+      // 🎨 LIGHT MODE AKTİF ETME
+      const disableDarkmode = () => {
+        isItDark = false;
+        navi_themeSwitch(isItDark);
+        document.body.classList.remove("darkmode");
+        localStorage.setItem("darkmode", "null");
+        drawMultiDoughnutChart("doughnutChart", dataSets, lightColors, "white",isItDark);
+      };
+
+      // 📌 Sayfa yüklenince mevcut temayı kontrol et
+      document.addEventListener("DOMContentLoaded", function() {
+        if (darkmode === "active") {
+          enableDarkmode();
+        } else {
+          disableDarkmode();
+        }
+      });
+      
+      //SEARCH-BAR-JS
+      // 🔘 Butona tıklanınca tema değiştir
+      themeSwitch.addEventListener("click", () => {
+        darkmode = localStorage.getItem("darkmode");
+        darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+      });
+
+      // 🔍 Arama çubuğu açma ve kapama
+      const searchToggle = document.querySelector(".search-toggle");
+      const searchContainer = document.querySelector(".search-container");
+      const searchInput = document.querySelector(".search-input");
+
+      searchToggle.addEventListener("click", () => {
+        searchContainer.classList.add("active");
+        searchInput.focus();
+      });
+
+      searchInput.addEventListener("blur", () => {
+        if (searchInput.value === "") {
+          searchContainer.classList.remove("active");
+        }
+      });
+
+      //DOUGNUT-JS
+      function drawMultiDoughnutChart(canvasId, dataSets, colors, strokeColor,isDarkMode) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) {
+            console.error("Canvas element not found:", canvasId);
+            return;
+        }
+        
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+            console.error("Failed to get 2D context for:", canvasId);
+            return;
+        }
+        
+        const maxRadius = canvas.width / 2;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const layerCount = dataSets.length;
+        const layerRadiusStep = maxRadius / (layerCount + 1);
+        let animationProgress = 0;
+        const animationSpeed = 0.0067;
+
+        function easeOut(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = isDarkMode ? "#000000" : "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            let easedProgress = easeOut(animationProgress);
+
+            for (let layer = 0; layer < layerCount; layer++) {
+                let radius = maxRadius - layer * layerRadiusStep;
+                let cutoutRadius = radius * 0.5;
+                let startAngle = 0;
+        
+                for (let i = 0; i < dataSets[layer].length; i++) {
+                    const sliceAngle = (dataSets[layer][i] / 100) * 2 * Math.PI * easedProgress;
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY); 
+                    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                    ctx.lineTo(centerX, centerY);
+                    ctx.fillStyle = colors[layer][i] || "#000";
+                    ctx.fill();
+                    ctx.stroke();
+                    startAngle += sliceAngle;
+                    ctx.closePath();
+                }
+        
+                ctx.beginPath();
+                ctx.strokeStyle = strokeColor;
+                ctx.lineWidth = 20;
+                ctx.arc(centerX, centerY, cutoutRadius, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fillStyle = strokeColor;
+                ctx.fill();           
+            }
+            
+            let innerCircleRadius = (maxRadius - layerRadiusStep) * easedProgress;
+            ctx.beginPath(); 
+            ctx.arc(centerX, centerY, innerCircleRadius, 0 , 2 * Math.PI);
+            ctx.fillStyle = "#4e4c4d";
+            ctx.fill();
+        
+            let animatedNumber = Math.floor(easedProgress * 100);
+            ctx.fillStyle = `rgba(255, 255, 255, ${easedProgress})`;
+            ctx.font = `${Math.floor(30 * easedProgress)}px Arial`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText('%' + animatedNumber, centerX, centerY);
+        
+            if (animationProgress < 1) {
+                animationProgress += animationSpeed;
+                requestAnimationFrame(animate);
+            } else {
+                animationProgress = 1;
+            }
+        }
+        
+        animate();
+      }
+
+    const canvas = document.getElementById('doughnutChart');
+    if (canvas) {
+        canvas.height = canvas.width;
+    }
+
+    const strokeColor = "#ffffff"; // Varsayılan çizgi rengi ekledim
+
+    drawMultiDoughnutChart('doughnutChart', dataSets, lightColors, strokeColor);
+
+
+      //CALENDAR-JS
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = date.getMonth();
+      let haveNotification = false;
+
+      const day = document.querySelector(".calendar-dates");
+
+      const currdate = document
+          .querySelector(".calendar-current-date");
+
+      const prenexIcons = document
+          .querySelectorAll(".calendar-navigation span");
+
+      // Array of month names
+      const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+      ];
+
+      // Function to generate the calendar
+      const manipulate = () => {
+
+          // Get the first day of the month
+          let dayone = new Date(year, month, 1).getDay();
+
+          // Get the last date of the month
+          let lastdate = new Date(year, month + 1, 0).getDate();
+
+          // Get the day of the last date of the month
+          let dayend = new Date(year, month, lastdate).getDay();
+
+          // Get the last date of the previous month
+          let monthlastdate = new Date(year, month, 0).getDate();
+
+          // Variable to store the generated calendar HTML
+          let lit = "";
+
+          // Loop to add the last dates of the previous month
+          for (let i = dayone; i > 0; i--) {
+              lit +=
+                  `<li class="inactive">${monthlastdate - i + 1}</li>`;
+          }
+
+          // Loop to add the dates of the current month
+          for (let i = 1; i <= lastdate; i++) {
+
+              // Check if the current date is today
+              let isToday = i === date.getDate()
+                  && month === new Date().getMonth()
+                  && year === new Date().getFullYear()
+                  ? "active"
+                  : "";
+              if(haveNotification){
+                  lit += `<li class="${isToday}">${i}<span class="badge rounded-pill badge-notification bg-danger">1</span> </li>`;//bu kısımlar bildirim kontrolü olucak
+              }else{
+                  lit += `<li class="${isToday}">${i}</li>`;
+              }
+              
+              
+
+          }
+
+          // Loop to add the first dates of the next month
+          for (let i = dayend; i < 6; i++) {
+              lit += `<li class="inactive">${i - dayend + 1}</li>`
+          }
+
+          // Update the text of the current date element 
+          // with the formatted current month and year
+          currdate.innerText = `${months[month]} ${year}`;
+
+          // update the HTML of the dates element 
+          // with the generated calendar
+          day.innerHTML = lit;
+      }
+
+      manipulate();
+
+      // Attach a click event listener to each icon
+      prenexIcons.forEach(icon => {
+
+          // When an icon is clicked
+          icon.addEventListener("click", () => {
+
+              // Check if the icon is "calendar-prev"
+              // or "calendar-next"
+              month = icon.id === "calendar-prev" ? month - 1 : month + 1;
+
+              // Check if the month is out of range
+              if (month < 0 || month > 11) {
+
+                  // Set the date to the first day of the 
+                  // month with the new year
+                  date = new Date(year, month, new Date().getDate());
+
+                  // Set the year to the new year
+                  year = date.getFullYear();
+
+                  // Set the month to the new month
+                  month = date.getMonth();
+              }
+
+              else {
+
+                  // Set the date to the current date
+                  date = new Date();
+              }
+
+              // Call the manipulate function to 
+              // update the calendar display
+              manipulate();
+          });
+      });
+
+    </script>
+
+
+</body>
+</html> 
